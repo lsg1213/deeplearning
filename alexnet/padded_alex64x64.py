@@ -4,12 +4,12 @@ import matplotlib.pyplot as plt
 import numpy as np
 import tensorflow_datasets as ds
 import os
-os.environ["CUDA_VISIBLE_DEVICES"] = '1'
+os.environ["CUDA_VISIBLE_DEVICES"] = '0'
 
 size = '64x64'
 name = 'imagenet_resized/'+size
 val_or_test = 'validation'
-data_dir = 'dataset/datasets_tfrecord/'
+data_dir = '../../dataset/datasets_tfrecord/'
 
 dataset_train, info = ds.load(
     name, with_info=True, as_supervised=True, data_dir=data_dir, split='train')
@@ -67,6 +67,6 @@ model.compile(optimizer=optimizer,
 
 
 model.fit(dataset_train, epochs=100, validation_data=dataset_validation)
-test_value = model.evaluate(dataset_validation, verbose=0)
+test_value = model.evaluate(dataset_validation, verbose=2)
 print("Evaluated loss on test data: {:.4f}, Accuracy: {:.4f}".format(
     test_value[0], test_value[1]))
